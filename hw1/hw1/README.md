@@ -23,7 +23,7 @@ web server”;
 ```bash
 ansible-playbook -u root -i hosts hw1.yaml
   ```
-  
+
 ### В процессе выполнения ДЗ:
 
 1. Создана роль, устанавливающая Apache web server на дистрибутивы центос/дебиан
@@ -42,5 +42,5 @@ curl http://10.4.160.245/
 2. При помощи lineinfile внесены требуемые изменения в /etc/default/grub ,
    grub2-mkconfig выполнен при помощи
   ```bash
-  command: grub2-mkconfig -o /etc/default/grub
+  command: grub2-mkconfig -o /boot/grub2/grub.cfg
   ```
