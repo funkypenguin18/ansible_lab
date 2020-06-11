@@ -1,0 +1,4 @@
+- hosts: httpd
+  gather_facts: yes
+  roles:
+    - hw1
