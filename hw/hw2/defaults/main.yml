@@ -1,0 +1,3 @@
+---
+# optional SELinux booleans to be set i.e. for Centos
+vsftpd_seboolean: {ftpd_anon_write : on, ftpd_full_access : on}

@@ -1,0 +1,33 @@
+---  
+- hosts: node1
+  user: ansible
+  become_method: sudo
+  tasks:
+   
+    # Check file fo existence
+    - stat:
+        path: /tmp/database
+      register: result
+      
+    - name: Add official MariaDB repository
+      yum_repository:
+        name: MariaDB
+        description: Official MariaDB repository
+        baseurl: "http://yum.mariadb.org/10.4/centos7-amd64/"
+        gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+        gpgcheck: true
+      when: result.stat.isdir is defined and result.stat.isreg
+      
+    - name: Install packages
+      package:
+        name: "{{ item }}"
+        state: installed
+      with_items: "MariaDB-common, MariaDB-server, MySQL-python"
+      when: result.stat.isdir is defined and result.stat.isreg
+      
+    - name: Ensure service is started
+      service:
+        name: mariadb
+        state: started
+        enabled: true
+          

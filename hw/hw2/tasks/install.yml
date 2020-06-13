@@ -1,0 +1,29 @@
+---
+
+- name: Create a directory if it does not exist
+  file:
+    path: /var/ftp/pub
+    state: directory
+    mode: '0775'
+
+- name: Recursively change ownership of a directory
+  file:
+    path: /var/ftp/pub
+    state: directory
+    recurse: yes
+    owner: ftp
+    group: ftp
+    
+- name: Install FTP 
+  yum:
+    name: vsftpd
+    state: present
+  notify:
+    - start vsftpd
+
+- name: Install base applications
+  yum: name={{ item }} state=present
+  with_items:
+    - libsemanage-python
+    
+    

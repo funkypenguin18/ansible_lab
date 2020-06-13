@@ -1,0 +1,21 @@
+---  
+- hosts: node1
+  user: ansible
+  become_method: sudo
+  tasks:
+   
+    - name: Remove file (delete file)
+      file:
+        path: /var/www/html/index.html
+        state: absent
+        
+    - name: remove httpd 
+      yum: name=httpd state=absent
+
+
+    - name: Close port 80 for http access
+      firewalld:
+        service: http
+        permanent: true
+        state: disabled
+     
