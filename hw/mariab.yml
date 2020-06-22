@@ -1,5 +1,5 @@
 ---  
-- hosts: node1
+- hosts: All
   user: ansible
   become_method: sudo
   tasks:
